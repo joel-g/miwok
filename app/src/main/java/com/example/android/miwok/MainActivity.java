@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.activity_main);
+
         TextView numbers = (TextView) findViewById(R.id.numbers);
         TextView colors = (TextView) findViewById(R.id.colors);
         TextView family = (TextView) findViewById(R.id.family);
@@ -57,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivty.class);
+                startActivity(phrasesIntent);
             }
         });
-        setContentView(R.layout.activity_main);
+
     }
 
 
