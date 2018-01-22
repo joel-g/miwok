@@ -8,28 +8,28 @@ import android.content.Context;
 
 public class Word {
 
-    private String miwok;
-    private String defaultTranslation;
+    private String mMiwokTranslation;
+    private String mDefaultTranslation;
 
 
-    public Word (Context context) {
-        miwok = "";
-        defaultTranslation = "";
+    public Word (String defaultTranslation, String miwokTranslation) {
+        mMiwokTranslation = miwokTranslation;
+        mDefaultTranslation = defaultTranslation;
     }
 
     public String getMiwokTranslation() {
-        return miwok;
+        return mMiwokTranslation;
     }
 
     public String getDefaultTranslation() {
-        return defaultTranslation;
+        return mDefaultTranslation;
     }
 
     public void setMiwok(String text) {
-        miwok = text;
+        mMiwokTranslation = text;
     }
 
     public void setDefaultTranslation(String text) {
-        defaultTranslation = text;
+        mDefaultTranslation = text;
     }
 }
