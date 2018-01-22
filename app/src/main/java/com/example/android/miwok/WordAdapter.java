@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class WordAdapter extends ArrayAdapter<Word> {
 
-
     public WordAdapter(Activity context, ArrayList<Word> words) {
         super(context, 0, words);
     }
@@ -32,21 +31,14 @@ public class WordAdapter extends ArrayAdapter<Word> {
                     R.layout.list_item, parent, false);
         }
 
-        // Get the {@link AndroidFlavor} object located at this position in the list
         Word currentWord = getItem(position);
 
-        // Find the TextView in the list_item.xml layout with the ID version_name
         TextView defaultTextView = (TextView) listItemView.findViewById(R.id.default_text);
-
         defaultTextView.setText(currentWord.getDefaultTranslation());
 
         TextView miwokTextView = (TextView) listItemView.findViewById(R.id.miwok_text);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
         miwokTextView.setText(currentWord.getMiwokTranslation());
 
         return listItemView;
-
-//        return super.getView(position, convertView, parent);
     }
 }
