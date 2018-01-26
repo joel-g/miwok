@@ -26,12 +26,10 @@ public class FamilyActivity extends AppCompatActivity {
         words.add(new Word("grandfather", "paapa", R.drawable.family_grandfather));
         words.add(new Word("grandmother", "ama", R.drawable.family_grandmother));
 
-        WordAdapter wordAdapter = new WordAdapter(this, words);
+        WordAdapter wordAdapter = new WordAdapter(this, words, R.color.category_family);
 
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(wordAdapter);
 
-        int color = getResources().getColor(R.color.category_family);
-        listView.setBackgroundColor(color);
     }
 }
