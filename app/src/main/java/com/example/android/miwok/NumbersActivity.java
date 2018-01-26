@@ -3,6 +3,7 @@ package com.example.android.miwok;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,10 @@ public class NumbersActivity extends AppCompatActivity {
         WordAdapter wordAdapter = new WordAdapter(this, words);
 
         ListView listView = (ListView) findViewById(R.id.list);
-
         listView.setAdapter(wordAdapter);
+
+        int color = getResources().getColor(R.color.category_numbers);
+        listView.setBackgroundColor(color);
+
     }
 }
