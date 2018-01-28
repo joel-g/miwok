@@ -52,8 +52,8 @@ public class WordAdapter extends ArrayAdapter<Word> {
 
         final MediaPlayer mediaPlayer = MediaPlayer.create(getContext(), currentWord.getAudioResourceId());
 
-        Button playButton = (Button) listItemView.findViewById(R.id.play_button);
-        playButton.setOnClickListener(new View.OnClickListener() {
+        View frame = listItemView.findViewById(R.id.text_container);
+        frame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mediaPlayer.start();
