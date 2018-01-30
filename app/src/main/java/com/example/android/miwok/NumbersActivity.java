@@ -1,7 +1,10 @@
 package com.example.android.miwok;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -9,12 +12,21 @@ import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
 
+    MediaPlayer mMediaPlayer;
+
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
 
-        ArrayList<Word> words = new ArrayList<Word>();
+        final ArrayList<Word> words = new ArrayList<Word>();
 
         words.add(new Word("one", "lutti", R.raw.number_one, R.drawable.number_one));
         words.add(new Word("two", "otiiko", R.raw.number_two, R.drawable.number_two));
@@ -32,7 +44,26 @@ public class NumbersActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(wordAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                releaseMediaPlayer();
+                Word word = words.get(position);
+                mMediaPlayer = MediaPlayer.create(NumbersActivity.this, word.getAudioResourceId());
+
+                mMediaPlayer.start();
+
+                mMediaPlayer.setOnCompletionListener(mCompletionListener);
+            }
+        });
+
     }
 
+    private void releaseMediaPlayer() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
+    }
 
 }

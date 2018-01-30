@@ -1,19 +1,31 @@
 package com.example.android.miwok;
 
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class FamilyActivity extends AppCompatActivity {
 
+    MediaPlayer mMediaPlayer;
+
+    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
 
-        ArrayList<Word> words = new ArrayList<Word>();
+        final ArrayList<Word> words = new ArrayList<Word>();
 
         words.add(new Word("father", "әpә", R.raw.family_father, R.drawable.family_father));
         words.add(new Word("mother", "әṭa", R.raw.family_mother, R.drawable.family_mother));
@@ -31,5 +43,25 @@ public class FamilyActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(wordAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                releaseMediaPlayer();
+                Word word = words.get(position);
+                mMediaPlayer = MediaPlayer.create(FamilyActivity.this, word.getAudioResourceId());
+
+                mMediaPlayer.start();
+
+                mMediaPlayer.setOnCompletionListener(mCompletionListener);
+            }
+        });
+
+    }
+
+    private void releaseMediaPlayer() {
+        if (mMediaPlayer != null) {
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
     }
 }
