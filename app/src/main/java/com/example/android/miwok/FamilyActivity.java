@@ -55,7 +55,11 @@ public class FamilyActivity extends AppCompatActivity {
                 mMediaPlayer.setOnCompletionListener(mCompletionListener);
             }
         });
+    }
 
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
     }
 
     private void releaseMediaPlayer() {
