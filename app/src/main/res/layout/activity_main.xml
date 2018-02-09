@@ -39,7 +39,7 @@
             android:background="?android:attr/selectableItemBackground"
             android:text="@string/category_colors" />
     </FrameLayout>
-    
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
